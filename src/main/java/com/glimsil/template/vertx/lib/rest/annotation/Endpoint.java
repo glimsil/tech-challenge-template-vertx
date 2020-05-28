@@ -1,4 +1,4 @@
-package com.glimsil.template.vertx.config.annotation;
+package com.glimsil.template.vertx.lib.rest.annotation;
 
 import io.vertx.core.http.HttpMethod;
 

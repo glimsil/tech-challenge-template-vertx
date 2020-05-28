@@ -22,8 +22,11 @@ repositories {
 
 dependencies {
     implementation group: 'io.netty', name: 'netty-tcnative-boringssl-static', version: '2.0.26.Final'
-	implementation group: 'io.vertx', name: 'vertx-core', version: '3.8.5'
-    implementation group: 'io.vertx', name: 'vertx-web', version: '3.8.5'
+    implementation group: 'io.vertx', name: 'vertx-jdbc-client', version: '3.9.1'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.12'
+	implementation group: 'io.vertx', name: 'vertx-core', version: '3.9.1'
+    implementation group: 'io.vertx', name: 'vertx-web', version: '3.9.1'
+    implementation group: 'io.vertx', name: 'vertx-config', version: '3.9.1'
 }
 
 run {

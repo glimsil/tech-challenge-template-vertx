@@ -1,7 +1,7 @@
-package com.glimsil.template.vertx.config;
+package com.glimsil.template.vertx.lib.rest;
 
-import com.glimsil.template.vertx.config.annotation.Api;
-import com.glimsil.template.vertx.config.annotation.Endpoint;
+import com.glimsil.template.vertx.lib.rest.annotation.Api;
+import com.glimsil.template.vertx.lib.rest.annotation.Endpoint;
 import io.vertx.core.Vertx;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -16,11 +16,11 @@ import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
+
 public class RouteConfig {
 
-    public Router configRoutes(Vertx vertx ) {
-        List<Class<?>> classes = getAnnotatedClassesInPackage("com.glimsil.template.vertx.api", Api.class);
-        classes.forEach(c -> System.out.println(c.getName()));
+    public Router configRoutes(Vertx vertx, String apiPackage) {
+        List<Class<?>> classes = getAnnotatedClassesInPackage(apiPackage, Api.class);
         Router router = Router.router(vertx);
         router.route().handler(BodyHandler.create());
         for(Class<?> c : classes) {

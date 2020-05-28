@@ -1,9 +1,10 @@
 package com.glimsil.template.vertx.api;
 
 import com.glimsil.template.vertx.api.dto.ProductDto;
+import com.glimsil.template.vertx.lib.rest.annotation.Api;
+import com.glimsil.template.vertx.lib.rest.annotation.Endpoint;
+import com.glimsil.template.vertx.repository.ProductRepository;
 import com.glimsil.template.vertx.service.ProductService;
-import com.glimsil.template.vertx.config.annotation.Api;
-import com.glimsil.template.vertx.config.annotation.Endpoint;
 import io.vertx.core.http.HttpMethod;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
@@ -14,6 +15,7 @@ import io.vertx.ext.web.RoutingContext;
 public class ProductApi {
 
     ProductService productService = ProductService.getInstance();
+    ProductRepository productRepository = new ProductRepository();
 
     @Endpoint(method = HttpMethod.GET)
     public void getProduct(RoutingContext routingContext) {
@@ -24,6 +26,17 @@ public class ProductApi {
         } else {
             response.putHeader("content-type", "application/json").end(messageJson.encodePrettily());
         }
+
+    }
+
+    @Endpoint(method = HttpMethod.GET, path = "/all")
+    public void getProducts(RoutingContext routingContext) {
+        HttpServerResponse response = routingContext.response();
+        productRepository.getAll(result -> {
+            JsonObject json = JsonObject.mapFrom(result);
+            System.out.println(json);
+            response.putHeader("content-type", "application/json").end(json.encodePrettily());
+        });
 
     }
 
